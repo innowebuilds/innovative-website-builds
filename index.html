@@ -3,37 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inno Web Builds</title>
+  <title>Innovative Website Builds</title>
   <link rel="stylesheet" href="style/style.css" />
   <script defer src="script/main.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2e0da3d45.js" crossorigin="anonymous"></script> <!-- FontAwesome for icons -->
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '4090794157829153');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=4090794157829153&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <script src="https://kit.fontawesome.com/a2e0da3d45.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="header">
     <h1 class="logo">Innovative Website Builds</h1>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#testimonials">Testimonials</a>
+    </nav>
+    <button id="mobile-toggle" aria-label="Toggle Navigation"><i class="fas fa-bars"></i></button>
   </header>
 
   <section class="hero">
     <div class="hero-content">
-      <h2>Building Powerful, Modern Websites</h2>
+      <h2 id="typed-text">Building Powerful, Modern Websites</h2>
       <p>Your vision, coded to perfection. We design and develop high-performance websites for businesses ready to grow online.</p>
       <a href="#contact" class="cta-button">Contact Us</a>
     </div>
@@ -63,13 +53,12 @@ src="https://www.facebook.com/tr?id=4090794157829153&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <!-- Contact Form after Projects Section -->
   <section id="contact" class="section fade-in">
     <h2>Contact Us</h2>
     <p>Let’s build something amazing together. Fill the form below and we’ll get in touch.</p>
     <form class="contact-form" action="https://formsubmit.co/innowebbuilds@outlook.com" method="POST">
       <input type="hidden" name="_captcha" value="false">
-      <input type="text" name="name" placeholder="full Name" required>
+      <input type="text" name="name" placeholder="Full Name" required>
       <input type="tel" name="phone" placeholder="Phone Number" required>
       <select name="websiteType" required>
         <option value="" disabled selected>Select Website Type</option>
@@ -78,7 +67,7 @@ src="https://www.facebook.com/tr?id=4090794157829153&ev=PageView&noscript=1"
         <option value="portfolio">Portfolio</option>
         <option value="maintenance">Website Maintenance</option>
       </select>
-      <input type="brief" name="brief" placeholder="small brief about your business" required>
+      <input type="text" name="brief" placeholder="Brief about your business" required>
       <button type="submit" class="cta-button">Submit</button>
     </form>
   </section>
@@ -107,5 +96,6 @@ src="https://www.facebook.com/tr?id=4090794157829153&ev=PageView&noscript=1"
   <footer class="footer">
     <p>&copy; 2025 Innovative Website Builds. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
