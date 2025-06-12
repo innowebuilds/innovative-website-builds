@@ -6,9 +6,13 @@
   --shadow: rgba(0, 0, 0, 0.5);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: 'Times New Roman', sans-serif;
+  font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
 }
@@ -22,6 +26,7 @@ a {
   background: var(--accent);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
@@ -34,14 +39,38 @@ a {
   font-size: 1.5rem;
 }
 
-.nav a {
-  margin-left: 1.5rem;
-  font-weight: 600;
-  transition: color 0.3s ease;
+.nav {
+  display: flex;
+  gap: 1.5rem;
 }
 
-.nav a:hover {
+#mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
   color: var(--primary);
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: var(--accent);
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .nav.show {
+    display: flex;
+  }
+
+  #mobile-toggle {
+    display: block;
+  }
 }
 
 .hero {
@@ -99,13 +128,17 @@ a {
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 10px var(--shadow);
-  transition: transform 0.3s;
   text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.05) translateY(-5px);
   background: #1a1a1a;
+  box-shadow: 0 8px 25px rgba(48, 147, 240, 0.6);
 }
 
 .testimonial-slider {
@@ -151,7 +184,6 @@ a {
   margin-top: 2rem;
 }
 
-/* Animation */
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -166,3 +198,21 @@ a {
   }
 }
 
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 32px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
