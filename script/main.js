@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Typing Animation
   const typedText = document.getElementById("typed-text");
-  const phrases = ["Building Powerful, Modern Websites", "Optimized For Speed & Growth", "Crafted With Love & Code"];
+  const phrases = ["Building Powerful, Modern Websites", "Optimized For Speed & Growth"];
   let currentPhrase = 0;
   let currentLetter = 0;
   let isDeleting = false;
