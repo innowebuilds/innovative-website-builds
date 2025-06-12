@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el);
   });
 
-  // Testimonial Slider
   const testimonials = document.querySelectorAll('.testimonial');
   let currentTestimonial = 0;
 
@@ -27,4 +26,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setInterval(showNextTestimonial, 5000);
+
+  document.getElementById('mobile-toggle').addEventListener('click', () => {
+    document.querySelector('.nav').classList.toggle('show');
+  });
+
+  // Typing Animation
+  const typedText = document.getElementById("typed-text");
+  const phrases = ["Building Powerful, Modern Websites", "Optimized For Speed & Growth", "Crafted With Love & Code"];
+  let currentPhrase = 0;
+  let currentLetter = 0;
+  let isDeleting = false;
+
+  function type() {
+    const current = phrases[currentPhrase];
+    typedText.textContent = current.slice(0, currentLetter);
+
+    if (!isDeleting && currentLetter < current.length) {
+      currentLetter++;
+      setTimeout(type, 100);
+    } else if (isDeleting && currentLetter > 0) {
+      currentLetter--;
+      setTimeout(type, 50);
+    } else {
+      isDeleting = !isDeleting;
+      if (!isDeleting) currentPhrase = (currentPhrase + 1) % phrases.length;
+      setTimeout(type, 1000);
+    }
+  }
+
+  type();
 });
