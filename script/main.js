@@ -31,31 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('.nav').classList.toggle('show');
   });
 
-  // Typing Animation
-  /*
-  const typedText = document.getElementById("typed-text");
-  const phrases = ["Building Powerful, Modern Websites", "Optimized For Speed & Growth"];
-  let currentPhrase = 0;
-  let currentLetter = 0;
-  let isDeleting = false;
+  // Toggle between Informative and Ecommerce package
+const toggle = document.getElementById('package-toggle');
+const informative = document.getElementById('informative-package');
+const ecommerce = document.getElementById('ecommerce-package');
 
-  function type() {
-    const current = phrases[currentPhrase];
-    typedText.textContent = current.slice(0, currentLetter);
-
-    if (!isDeleting && currentLetter < current.length) {
-      currentLetter++;
-      setTimeout(type, 100);
-    } else if (isDeleting && currentLetter > 0) {
-      currentLetter--;
-      setTimeout(type, 50);
-    } else {
-      isDeleting = !isDeleting;
-      if (!isDeleting) currentPhrase = (currentPhrase + 1) % phrases.length;
-      setTimeout(type, 1000);
-    }
+toggle.addEventListener('change', () => {
+  if (toggle.checked) {
+    informative.classList.remove('active');
+    ecommerce.classList.add('active');
+  } else {
+    ecommerce.classList.remove('active');
+    informative.classList.add('active');
   }
-
-  type();
-  */
 });
+
