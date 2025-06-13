@@ -124,21 +124,20 @@ a {
 }
 
 .project-card {
-  background: var(--accent);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 10px var(--shadow);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   text-align: center;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  color: #ffffff;
 }
 
 .project-card:hover {
   transform: scale(1.05) translateY(-5px);
-  background: #1a1a1a;
-  box-shadow: 0 8px 25px rgba(48, 147, 240, 0.6);
+  box-shadow: 0 8px 30px rgba(48, 147, 240, 0.6);
 }
 
 .testimonial-slider {
