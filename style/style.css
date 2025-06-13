@@ -262,7 +262,7 @@ input:checked + .slider:before {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background: #ff4d4d;
+  background: #3093f0;
   color: #fff;
   padding: 1rem 1.5rem;
   border-radius: 10px;
@@ -279,7 +279,7 @@ input:checked + .slider:before {
 
 .urgency-btn {
   background: #fff;
-  color: #ff4d4d;
+  color: #3093f0;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-weight: bold;
