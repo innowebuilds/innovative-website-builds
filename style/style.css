@@ -258,6 +258,47 @@ input:checked + .slider:before {
   animation-play-state: paused;
 }
 
+.urgency-box {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #ff4d4d;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 999;
+  max-width: 250px;
+  font-size: 0.9rem;
+  animation: slideIn 0.8s ease-out;
+}
+
+.urgency-box p {
+  margin: 0 0 0.5rem;
+}
+
+.urgency-btn {
+  background: #fff;
+  color: #ff4d4d;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
