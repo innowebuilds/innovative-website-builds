@@ -225,6 +225,29 @@ a {
   margin-top: 2rem;
 }
 
+.footer-contact {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.footer-contact a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-contact a:hover {
+  color: var(--primary);
+}
+
+.footer-contact i {
+  margin-right: 0.4rem;
+}
+
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
