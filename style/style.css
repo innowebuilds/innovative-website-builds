@@ -226,6 +226,29 @@ a {
   transition: all 0.3s ease;
 }
 
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.features li::before {
+  content: "✅";
+  color: #00e676;
+  font-size: 1rem;
+}
+
 .package-type:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 30px rgba(48, 147, 240, 0.5);
