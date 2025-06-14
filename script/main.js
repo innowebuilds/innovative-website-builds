@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.1
-  });
+  }, { threshold: 0.1 });
 
   fadeElements.forEach(el => {
     observer.observe(el);
@@ -31,18 +29,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('.nav').classList.toggle('show');
   });
 
-  // Toggle between Informative and Ecommerce package
-const toggle = document.getElementById('package-toggle');
-const informative = document.getElementById('informative-package');
-const ecommerce = document.getElementById('ecommerce-package');
+  // Pricing toggle logic
+  const toggle = document.getElementById('package-toggle');
+  const info = document.getElementById('informative-package');
+  const eco = document.getElementById('ecommerce-package');
 
-toggle.addEventListener('change', () => {
-  if (toggle.checked) {
-    informative.classList.remove('active');
-    ecommerce.classList.add('active');
-  } else {
-    ecommerce.classList.remove('active');
-    informative.classList.add('active');
+  if (toggle && info && eco) {
+    toggle.addEventListener('change', () => {
+      if (toggle.checked) {
+        info.classList.remove('active');
+        eco.classList.add('active');
+      } else {
+        eco.classList.remove('active');
+        info.classList.add('active');
+      }
+    });
   }
 });
-
