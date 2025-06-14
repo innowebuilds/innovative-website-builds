@@ -244,9 +244,10 @@ a {
 }
 
 .features li::before {
-  content: "✅";
+  content: "\f00c"; /* fa-check */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   color: #00e676;
-  font-size: 1rem;
 }
 
 .package-type:hover {
