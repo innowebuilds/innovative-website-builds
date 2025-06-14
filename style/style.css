@@ -229,19 +229,27 @@ a {
 .features {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 2rem;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  min-height: 280px; /* force equal card height for alignment */
 }
 
 .features li {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   font-size: 0.95rem;
 }
+
+.features li::before {
+  content: "✓";
+  color: #00e676;
+  font-size: 1.1rem;
+}
+
 
 .package-type:hover {
   transform: scale(1.02);
