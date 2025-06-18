@@ -148,48 +148,55 @@ a {
 
 #testimonials {
   text-align: center;
+  margin-top: 4rem;
 }
 
-.testimonial-slider {
-  position: relative;
-  max-width: 700px;
-  margin: 3rem auto 0;
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-inline: 1rem;
 }
 
-.testimonial {
-  display: none;
-  padding: 2rem;
+.testimonial-card {
   background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  transition: opacity 0.5s ease;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  text-align: left;
+  position: relative;
+  color: #eee;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonial.active {
-  display: block;
-  animation: fadeInUp 0.8s ease forwards;
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(48, 147, 240, 0.3);
 }
 
-.testimonial i {
+.testimonial-card i {
   font-size: 1.8rem;
-  color: #3093f0;
+  color: var(--primary);
   margin-bottom: 1rem;
 }
 
-.testimonial p {
+.testimonial-card p {
+  font-size: 1rem;
   font-style: italic;
-  font-size: 1.05rem;
   color: #ddd;
-  margin-bottom: 0.8rem;
   line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
-.testimonial span {
+.testimonial-card span {
   display: block;
+  font-weight: 500;
   font-size: 0.95rem;
   color: #bbb;
-  font-weight: 500;
 }
+
 
 @keyframes fadeInUp {
   0% {
