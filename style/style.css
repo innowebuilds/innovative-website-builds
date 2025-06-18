@@ -332,3 +332,12 @@ a {
   margin-bottom: 1.2rem;
   color: var(--primary);
 }
+
+.cta-highlight {
+  background: linear-gradient(90deg, #3093f0, #1a1a1a);
+  text-align: center;
+  color: white;
+  padding: 3rem 1.5rem;
+  border-radius: 16px;
+  margin-top: 4rem;
+}
