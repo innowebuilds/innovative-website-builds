@@ -146,22 +146,62 @@ a {
   box-shadow: 0 8px 30px rgba(48, 147, 240, 0.6);
 }
 
+#testimonials {
+  text-align: center;
+}
+
 .testimonial-slider {
   position: relative;
+  max-width: 700px;
+  margin: 3rem auto 0;
 }
 
 .testimonial {
   display: none;
-  text-align: center;
   padding: 2rem;
-  background: var(--accent);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px var(--shadow);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.5s ease;
 }
 
 .testimonial.active {
   display: block;
+  animation: fadeInUp 0.8s ease forwards;
 }
+
+.testimonial i {
+  font-size: 1.8rem;
+  color: #3093f0;
+  margin-bottom: 1rem;
+}
+
+.testimonial p {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #ddd;
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.testimonial span {
+  display: block;
+  font-size: 0.95rem;
+  color: #bbb;
+  font-weight: 500;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* Container Card */
 .form-card {
