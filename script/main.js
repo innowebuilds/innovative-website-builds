@@ -72,6 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   }
 
-  // Start the countdown to June 30, 2025 @ 23:59
-  startCountdown("2025-06-30T23:59:00");
+  // Auto set countdown to 7 days from now
+const now = new Date();
+const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+futureDate.setHours(23, 59, 0); // Ends at 11:59 PM
+
+startCountdown(futureDate.toISOString());
+
 });
