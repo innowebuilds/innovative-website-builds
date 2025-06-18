@@ -45,4 +45,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // ✅ Countdown Timer Function
+  function startCountdown(targetDateStr) {
+    const countdown = document.getElementById("countdown-timer");
+    if (!countdown) return;
+
+    const targetDate = new Date(targetDateStr).getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        clearInterval(timer);
+        countdown.innerText = "Offer ended";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      countdown.innerText = `${days}d ${hrs}h ${mins}m ${secs}s`;
+    }, 1000);
+  }
+
+  // Start the countdown to June 30, 2025 @ 23:59
+  startCountdown("2025-06-30T23:59:00");
 });
