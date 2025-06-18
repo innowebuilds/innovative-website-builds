@@ -352,21 +352,6 @@ a {
   background: linear-gradient(to top, #121212 0%, transparent 100%);
 }
 
-.sticky-call-btn {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #00c3ff;
-  color: #000;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  z-index: 999;
-  display: none;
-}
-
 /* Show only on screens smaller than 768px */
 @media (max-width: 768px) {
   .sticky-call-btn {
