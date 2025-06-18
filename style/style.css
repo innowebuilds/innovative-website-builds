@@ -346,12 +346,16 @@ a {
 }
 
 .cta-highlight {
-  background: linear-gradient(90deg, #3093f0, #1a1a1a);
+  background: linear-gradient(135deg, #3093f0, #121212);
+  padding: 4rem 2rem;
   text-align: center;
   color: white;
-  padding: 3rem 1.5rem;
   border-radius: 16px;
-  margin-top: 4rem;
+  margin: 4rem auto 2rem;
+  max-width: 960px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
 }
 
 .section + .section::before {
