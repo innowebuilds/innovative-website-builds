@@ -78,10 +78,16 @@ a {
   align-items: center;
   justify-content: center;
   height: 80vh;
-  background: linear-gradient(to right, #141e30, #243b55);
   text-align: center;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: linear-gradient(-45deg, #1b1b1b, #243b55, #3093f0, #121212);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
 }
+
 
 .hero-content h2 {
   font-size: 2.5rem;
@@ -271,6 +277,12 @@ a {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .pricing-comparison {
