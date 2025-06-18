@@ -345,41 +345,7 @@ a {
   color: var(--primary);
 }
 
-.cta-highlight {
-  position: relative;
-  overflow: hidden;
-  padding: 4rem 2rem;
-  text-align: center;
-  border-radius: 16px;
-  background: linear-gradient(-45deg, #3093f0, #1a1a1a, #1f1f1f, #243b55);
-  background-size: 400% 400%;
-  animation: gradientMove 10s ease infinite;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  color: white;
-  max-width: 960px;
-  margin: 4rem auto 2rem;
-}
 
-.cta-inner {
-  position: relative;
-  z-index: 1;
-}
-
-.cta-highlight h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.cta-highlight p {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.cta-highlight .cta-button {
-  padding: 0.9rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-}
 
 .section + .section::before {
   content: '';
