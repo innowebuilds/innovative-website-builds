@@ -341,3 +341,10 @@ a {
   border-radius: 16px;
   margin-top: 4rem;
 }
+
+.section + .section::before {
+  content: '';
+  display: block;
+  height: 60px;
+  background: linear-gradient(to top, #121212 0%, transparent 100%);
+}
