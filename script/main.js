@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // 👁️ Fade-in on scroll
   const fadeElements = document.querySelectorAll(".fade-in");
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -9,50 +9,43 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, { threshold: 0.1 });
+  fadeElements.forEach(el => observer.observe(el));
 
-  fadeElements.forEach(el => {
-    observer.observe(el);
-  });
-
+  // 💬 Testimonial slider
   const testimonials = document.querySelectorAll('.testimonial');
   let currentTestimonial = 0;
-
   function showNextTestimonial() {
     testimonials[currentTestimonial].classList.remove('active');
     currentTestimonial = (currentTestimonial + 1) % testimonials.length;
     testimonials[currentTestimonial].classList.add('active');
   }
-
   setInterval(showNextTestimonial, 5000);
 
-  document.getElementById('mobile-toggle').addEventListener('click', () => {
-    document.querySelector('.nav').classList.toggle('show');
-  });
-
-  // Pricing toggle logic
-  const toggle = document.getElementById('package-toggle');
-  const info = document.getElementById('informative-package');
-  const eco = document.getElementById('ecommerce-package');
-
-  if (toggle && info && eco) {
-    toggle.addEventListener('change', () => {
-      if (toggle.checked) {
-        info.classList.remove('active');
-        eco.classList.add('active');
-      } else {
-        eco.classList.remove('active');
-        info.classList.add('active');
-      }
+  // 📱 Mobile Nav Toggle
+  const toggleBtn = document.getElementById('mobile-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      document.querySelector('.nav').classList.toggle('show');
     });
   }
 
-  // ✅ Countdown Timer Function
+  // 💰 Package Toggle Logic (if switcher still exists)
+  const toggle = document.getElementById('package-toggle');
+  const info = document.getElementById('informative-package');
+  const eco = document.getElementById('ecommerce-package');
+  if (toggle && info && eco) {
+    toggle.addEventListener('change', () => {
+      info.classList.toggle('active', !toggle.checked);
+      eco.classList.toggle('active', toggle.checked);
+    });
+  }
+
+  // 🕒 Countdown Timer for Urgency Box
   function startCountdown(targetDateStr) {
     const countdown = document.getElementById("countdown-timer");
     if (!countdown) return;
 
     const targetDate = new Date(targetDateStr).getTime();
-
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const diff = targetDate - now;
@@ -67,34 +60,29 @@ document.addEventListener("DOMContentLoaded", () => {
       const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const mins = Math.floor((diff / (1000 * 60)) % 60);
       const secs = Math.floor((diff / 1000) % 60);
-
       countdown.innerText = `${days}d ${hrs}h ${mins}m ${secs}s`;
     }, 1000);
   }
 
-  // Auto set countdown to 7 days from now
-const now = new Date();
-const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-futureDate.setHours(23, 59, 0); // Ends at 11:59 PM
+  // Automatically set countdown 7 days from now @ 23:59
+  const now = new Date();
+  const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+  futureDate.setHours(23, 59, 0);
+  startCountdown(futureDate.toISOString());
 
-startCountdown(futureDate.toISOString());
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll("#about-slider .about-slide");
-  let current = 0;
-
-  function showSlide(index) {
-    slides.forEach((s, i) => {
-      s.style.display = i === index ? "block" : "none";
+  // 🚀 About Section Auto-Slider
+  const aboutSlides = document.querySelectorAll("#about-slider .about-slide");
+  let aboutIndex = 0;
+  function showAboutSlide(index) {
+    aboutSlides.forEach((slide, i) => {
+      slide.style.display = i === index ? "block" : "none";
     });
   }
-
-  showSlide(current);
-
-  setInterval(() => {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-  }, 4000);
+  if (aboutSlides.length > 0) {
+    showAboutSlide(aboutIndex);
+    setInterval(() => {
+      aboutIndex = (aboutIndex + 1) % aboutSlides.length;
+      showAboutSlide(aboutIndex);
+    }, 4000);
+  }
 });
