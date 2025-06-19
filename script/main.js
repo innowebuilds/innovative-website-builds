@@ -80,3 +80,21 @@ futureDate.setHours(23, 59, 0); // Ends at 11:59 PM
 startCountdown(futureDate.toISOString());
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll("#about-slider .about-slide");
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((s, i) => {
+      s.style.display = i === index ? "block" : "none";
+    });
+  }
+
+  showSlide(current);
+
+  setInterval(() => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }, 4000);
+});
