@@ -72,21 +72,4 @@ document.addEventListener("DOMContentLoaded", () => {
   futureDate.setHours(23, 59, 0);
   startCountdown(futureDate.toISOString());
 
-  // 🚀 About Section Slider (Transform-based)
-  const aboutSlider = document.getElementById("about-slider");
-  const aboutSlides = aboutSlider?.querySelectorAll(".about-slide") || [];
-  let aboutIndex = 0;
-
-  function showAboutSlide(index) {
-    if (!aboutSlider) return;
-    aboutSlider.style.transform = `translateX(-${index * 100}%)`;
-  }
-
-  if (aboutSlides.length > 1) {
-    showAboutSlide(aboutIndex);
-    setInterval(() => {
-      aboutIndex = (aboutIndex + 1) % aboutSlides.length;
-      showAboutSlide(aboutIndex);
-    }, 4000);
-  }
 });
