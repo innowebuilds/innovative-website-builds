@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 👁️ Fade-in on scroll
+  // 👁️ Fade-in sections
   const fadeElements = document.querySelectorAll(".fade-in");
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     currentTestimonial = (currentTestimonial + 1) % testimonials.length;
     testimonials[currentTestimonial].classList.add('active');
   }
-  setInterval(showNextTestimonial, 5000);
+  if (testimonials.length > 1) {
+    setInterval(showNextTestimonial, 5000);
+  }
 
   // 📱 Mobile Nav Toggle
   const toggleBtn = document.getElementById('mobile-toggle');
@@ -29,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 💰 Package Toggle Logic (if switcher still exists)
+  // 💰 Package Toggle Logic
   const toggle = document.getElementById('package-toggle');
   const info = document.getElementById('informative-package');
   const eco = document.getElementById('ecommerce-package');
@@ -64,21 +66,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   }
 
-  // Automatically set countdown 7 days from now @ 23:59
+  // Set countdown 7 days from now
   const now = new Date();
   const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
   futureDate.setHours(23, 59, 0);
   startCountdown(futureDate.toISOString());
 
-  // 🚀 About Section Auto-Slider
-  const aboutSlides = document.querySelectorAll("#about-slider .about-slide");
+  // 🚀 About Section Slider (Transform-based)
+  const aboutSlider = document.getElementById("about-slider");
+  const aboutSlides = aboutSlider?.querySelectorAll(".about-slide") || [];
   let aboutIndex = 0;
+
   function showAboutSlide(index) {
-    aboutSlides.forEach((slide, i) => {
-      slide.style.display = i === index ? "block" : "none";
-    });
+    if (!aboutSlider) return;
+    aboutSlider.style.transform = `translateX(-${index * 100}%)`;
   }
-  if (aboutSlides.length > 0) {
+
+  if (aboutSlides.length > 1) {
     showAboutSlide(aboutIndex);
     setInterval(() => {
       aboutIndex = (aboutIndex + 1) % aboutSlides.length;
