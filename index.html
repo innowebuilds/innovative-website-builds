@@ -40,6 +40,7 @@
     src="https://www.facebook.com/tr?id=4090794157829153&ev=PageView&noscript=1"/>
   </noscript>
   <!-- End Facebook Pixel -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -113,18 +114,7 @@
   </div>
 </section>
 
-  <section id="about" class="section fade-in">
-  <h2>About InnoWebBuilds</h2>
-  <p>
-    We build websites that go beyond “just looking good.” Our mission is to deliver digital experiences that are fast, mobile-friendly, and designed to help your business grow.
-  </p>
-  <ul class="power-points">
-    <li>- Fast-loading, optimized websites</li>
-    <li>- Fully responsive designs for mobile and desktop</li>
-    <li>- SEO-optimized and conversion-focused</li>
-    <li>- Hosting, maintenance, and ongoing support</li>
-  </ul>
-</section>
+  
 
   <section id="projects" class="section fade-in">
     <h2>Websites We've Built</h2>
@@ -212,6 +202,19 @@
   </div>
 </section>
 
+<section id="about" class="section fade-in" data-aos="fade-up">
+  <h2 data-aos="fade-down" data-aos-delay="100">About InnoWebBuilds</h2>
+  <p data-aos="fade-up" data-aos-delay="300">
+    We build websites that go beyond “just looking good.” Our mission is to deliver digital experiences that are fast, mobile-friendly, and designed to help your business grow.
+  </p>
+  <ul class="power-points">
+    <li data-aos="fade-right" data-aos-delay="500">- Fast-loading, optimized websites</li>
+    <li data-aos="fade-right" data-aos-delay="600">- Fully responsive designs for mobile and desktop</li>
+    <li data-aos="fade-right" data-aos-delay="700">- SEO-optimized and conversion-focused</li>
+    <li data-aos="fade-right" data-aos-delay="800">- Hosting, maintenance, and ongoing support</li>
+  </ul>
+</section>
+
  <footer class="footer">
   <p>&copy; 2025 Innovative Website Builds. All rights reserved.</p>
 
@@ -224,10 +227,13 @@
   </div>
 </footer>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-  </script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+</script>
 
 </body>
 </html>
