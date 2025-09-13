@@ -17,25 +17,6 @@ body {
   color: var(--text);
 }
 
-/* === NEW particle background === */
-#particles-js {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  background: #121212;
-}
-
-.header,
-.hero,
-.section,
-.footer {
-  position: relative;
-  z-index: 1;
-}
-
 a {
   color: var(--primary);
   text-decoration: none;
@@ -106,6 +87,7 @@ a {
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
 }
+
 
 .hero-content h2 {
   font-size: 2.5rem;
@@ -215,6 +197,7 @@ a {
   color: #bbb;
 }
 
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -225,6 +208,7 @@ a {
     transform: translateY(0);
   }
 }
+
 
 /* Container Card */
 .form-card {
@@ -389,6 +373,7 @@ a {
   color: #00e676;
   font-size: 1.1rem;
 }
+
 
 .package-type:hover {
   transform: scale(1.02);
