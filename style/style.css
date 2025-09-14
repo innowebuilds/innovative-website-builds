@@ -101,10 +101,13 @@ a {
   position: relative;
   overflow: hidden;
   z-index: 1;
+
+  /* 🔥 Animated background */
   background: linear-gradient(-45deg, #1b1b1b, #243b55, #3093f0, #121212);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
 }
+
 
 
 .hero-content h2 {
@@ -469,3 +472,4 @@ a {
   color: #ccc;
   line-height: 1.6;
 }
+
