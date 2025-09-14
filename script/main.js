@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById('mobile-toggle');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-      document.querySelector('.nav').classList.toggle('show');
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('show');
     });
   }
 
@@ -77,34 +78,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* -----------------------------
-   Particle Background (safe, self-contained)
-   Appended after your DOMContentLoaded logic.
+   Particle Background (self-contained)
+   Appended after DOMContentLoaded logic.
    ----------------------------- */
 
 (function () {
-  const canvas = document.getElementById('bg-canvas');
-  if (!canvas) return; // safe guard
+  const canvas = document.getElementById('background-canvas');
+  if (!canvas) return; // safe guard if canvas missing
 
   const ctx = canvas.getContext('2d');
 
+  // Resize canvas to full window size
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-  // initial size
   resizeCanvas();
   window.addEventListener('resize', () => {
     resizeCanvas();
     initParticles();
   });
 
-  // particle settings
+  // Particle storage
   let particlesArray = [];
+
   function getParticleCount() {
-    // scale number of particles with area but keep reasonable limits
     const area = canvas.width * canvas.height;
-    const base = Math.round(Math.max(40, Math.min(120, area / 12000)));
-    return base;
+    // area-based scaling, clamp between 40 and 120
+    return Math.round(Math.max(40, Math.min(120, area / 12000)));
   }
 
   class Particle {
@@ -119,9 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
       this.x += this.vx;
       this.y += this.vy;
 
-      // bounce
-      if (this.x <= 0 || this.x >= canvas.width) this.vx *= -1;
-      if (this.y <= 0 || this.y >= canvas.height) this.vy *= -1;
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
     draw() {
       ctx.beginPath();
@@ -134,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initParticles() {
     particlesArray = [];
-    const count = getParticleCount();
-    for (let i = 0; i < count; i++) {
+    const num = getParticleCount();
+    for (let i = 0; i < num; i++) {
       const r = Math.random() * 2 + 1;
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dist < maxDist) {
           const alpha = 1 - dist / maxDist;
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(48,147,240,${0.15 * alpha})`;
+          ctx.strokeStyle = `rgba(48,147,240,${0.12 * alpha})`;
           ctx.lineWidth = 1;
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
 
-  // Optional: small mouse interaction (subtle repulsion)
+  // Gentle mouse repulsion (optional subtle effect)
   const mouse = { x: null, y: null, radius: 80 };
   window.addEventListener('mousemove', function (e) {
     mouse.x = e.clientX;
@@ -192,7 +192,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mouse.y = null;
   });
 
-  // Gentle repulsion effect (keeps CPU low)
   function handleMouseRepel() {
     if (!mouse.x || !mouse.y) return;
     for (let p of particlesArray) {
@@ -203,14 +202,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const force = (mouse.radius - dist) / mouse.radius * 0.6;
         p.vx += (dx / dist) * force;
         p.vy += (dy / dist) * force;
-        // clamp velocity slightly
+        // clamp velocities
         p.vx = Math.max(-1.5, Math.min(1.5, p.vx));
         p.vy = Math.max(-1.5, Math.min(1.5, p.vy));
       }
     }
   }
 
-  // update loop that includes mouse logic at a small interval
   function loopWithMouse() {
     handleMouseRepel();
     setTimeout(loopWithMouse, 120);
