@@ -1,3 +1,14 @@
+/* Background Canvas */
+#background-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Push canvas behind all content */
+  pointer-events: none; /* Allow clicks on buttons/links */
+}
+
 :root {
   --bg: #121212;
   --text: #ffffff;
@@ -479,3 +490,4 @@ body > *:not(#bg-canvas) {
 .hero {
   background: transparent !important;
 }
+
