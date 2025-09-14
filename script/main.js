@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🕒 Countdown Timer for Urgency Box
+  // 🕒 Countdown Timer
   function startCountdown(targetDateStr) {
     const countdown = document.getElementById("countdown-timer");
     if (!countdown) return;
@@ -66,10 +66,90 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   }
 
-  // Set countdown 7 days from now
   const now = new Date();
   const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
   futureDate.setHours(23, 59, 0);
   startCountdown(futureDate.toISOString());
-
 });
+
+/* 🌌 Particle Background Animation */
+const canvas = document.getElementById("bg-canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particlesArray;
+
+class Particle {
+  constructor(x, y, dx, dy, size) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.size = size;
+  }
+  update() {
+    this.x += this.dx;
+    this.y += this.dy;
+
+    if (this.x < 0 || this.x > canvas.width) this.dx *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.dy *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = "#3093f0";
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particlesArray = [];
+  const numParticles = 80;
+  for (let i = 0; i < numParticles; i++) {
+    let size = Math.random() * 2 + 1;
+    let x = Math.random() * canvas.width;
+    let y = Math.random() * canvas.height;
+    let dx = (Math.random() - 0.5) * 0.8;
+    let dy = (Math.random() - 0.5) * 0.8;
+    particlesArray.push(new Particle(x, y, dx, dy, size));
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(p => {
+    p.update();
+    p.draw();
+  });
+
+  // Draw connecting lines
+  for (let i = 0; i < particlesArray.length; i++) {
+    for (let j = i; j < particlesArray.length; j++) {
+      let dx = particlesArray[i].x - particlesArray[j].x;
+      let dy = particlesArray[i].y - particlesArray[j].y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(48,147,240,0.2)";
+        ctx.lineWidth = 1;
+        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+        ctx.stroke();
+        ctx.closePath();
+      }
+    }
+  }
+
+  requestAnimationFrame(animateParticles);
+}
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  initParticles();
+});
+
+initParticles();
+animateParticles();
