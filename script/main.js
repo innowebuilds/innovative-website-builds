@@ -72,29 +72,4 @@ document.addEventListener("DOMContentLoaded", () => {
   futureDate.setHours(23, 59, 0);
   startCountdown(futureDate.toISOString());
 
-  // ✨ Random Orb Animation
-  const orbs = document.querySelectorAll('.background span');
-  orbs.forEach(orb => {
-    function randomMove() {
-      const x = (Math.random() - 0.5) * 200; // random X offset
-      const y = (Math.random() - 0.5) * 200; // random Y offset
-      const scale = 0.8 + Math.random() * 0.6;
-      const duration = 5000 + Math.random() * 5000; // 5–10s
-
-      orb.animate(
-        [
-          { transform: `translate(0,0) scale(1)` },
-          { transform: `translate(${x}px, ${y}px) scale(${scale})` }
-        ],
-        {
-          duration: duration,
-          direction: "alternate",
-          iterations: Infinity,
-          easing: "ease-in-out"
-        }
-      );
-    }
-    randomMove();
-  });
-
 });
