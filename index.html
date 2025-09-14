@@ -12,70 +12,57 @@
   <script src="https://kit.fontawesome.com/a2e0da3d45.js" crossorigin="anonymous"></script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-  <!-- Google tag (gtag.js) event - delayed navigation helper -->
-<script>
-  // Helper function to delay opening a URL until a gtag event is sent.
-  // Call it in response to an action that should navigate to a URL.
-  function gtagSendEvent(url) {
-    var callback = function () {
-      if (typeof url === 'string') {
-        window.location = url;
-      }
-    };
-    gtag('event', 'form_submit', {
-      'event_callback': callback,
-      'event_timeout': 2000,
-      // <event_parameters>
-    });
-    return false;
-  }
-</script>
+  <!-- Google Analytics & Tags -->
+  <script>
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'form_submit', {
+        'event_callback': callback,
+        'event_timeout': 2000,
+      });
+      return false;
+    }
+  </script>
 
-  <!-- Google tag (gtag.js) event -->
-<script>
-  gtag('event', 'page_view', {
-    // <event_parameters>
-  });
-</script>
+  <script>
+    gtag('event', 'page_view', {});
+  </script>
 
-  <!-- Google tag (gtag.js) event - delayed navigation helper -->
-<script>
-  // Helper function to delay opening a URL until a gtag event is sent.
-  // Call it in response to an action that should navigate to a URL.
-  function gtagSendEvent(url) {
-    var callback = function () {
-      if (typeof url === 'string') {
-        window.location = url;
-      }
-    };
-    gtag('event', 'click', {
-      'event_callback': callback,
-      'event_timeout': 2000,
-      // <event_parameters>
-    });
-    return false;
-  }
-</script>
+  <script>
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'click', {
+        'event_callback': callback,
+        'event_timeout': 2000,
+      });
+      return false;
+    }
+  </script>
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17403550908"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17403550908');
-</script> 
+  <!-- Google Tags -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17403550908"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17403550908');
+  </script> 
   
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTZ1343QKZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FTZ1343QKZ');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTZ1343QKZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTZ1343QKZ');
+  </script>
   
   <!-- Google Tag Manager -->
   <script>
@@ -87,22 +74,21 @@
   </script>
   <!-- End Google Tag Manager -->
 
-  <!-- Event snippet for Submit lead form conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-<script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17403550908/ktN3CNidmokbELy51OpA',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
+  <!-- Conversion Tracking -->
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17403550908/ktN3CNidmokbELy51OpA',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
 
   <!-- Facebook Pixel -->
   <script>
@@ -121,18 +107,18 @@ function gtag_report_conversion(url) {
     <img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=4090794157829153&ev=PageView&noscript=1"/>
   </noscript>
-  <!-- End Facebook Pixel -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-
   <!-- Google Tag Manager (noscript) -->
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K7P3R224"
     height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
+  <!-- 🌌 Particle Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Header -->
   <header class="header">
     <h1 class="logo">Innovative Website Builds</h1>
     <nav class="nav">
@@ -144,6 +130,7 @@ function gtag_report_conversion(url) {
     <button id="mobile-toggle" aria-label="Toggle Navigation"><i class="fas fa-bars"></i></button>
   </header>
 
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <h2>Building Powerful, Modern Websites</h2>
@@ -152,178 +139,85 @@ function gtag_report_conversion(url) {
     </div>
   </section>
 
-  <section id="packages-detail" class="section fade-in" data-aos="fade-up">
-  <h2 data-aos="fade-down">Compare Website Packages</h2>
+  <!-- Urgency Box -->
+  <section class="urgency">
+    <h2>⚡ Limited Time Offer!</h2>
+    <p>Sign up within <span id="countdown-timer"></span> to get a discounted package.</p>
+  </section>
 
-  <div class="pricing-comparison">
-    <div class="package-type" data-aos="fade-right" data-aos-delay="200">
-      <h3>Informative Website</h3>
-      <p class="price">Starting 200$</p>
-      <ul class="features">
-        <li> Up to 5 Pages</li>
-        <li> Custom or Template Design</li>
-        <li> Optional CMS</li>
-        <li> Responsive & SEO Ready</li>
-        <li> Contact Form with Email</li>
-        <li> 5 Months Free Support</li>
-        <li> Delivery in 5–7 Days</li>
-      </ul>
-      <a href="#contact" class="cta-button">Start Informative Site</a>
-    </div>
-
-    <div class="package-type" data-aos="fade-left" data-aos-delay="400">
-      <h3>E-commerce Website</h3>
-      <p class="price">Starting 300$</p>
-      <ul class="features">
-        <li> Unlimited Pages & Products</li>
-        <li> Custom Design with Dashboard</li>
-        <li> Product & Order Management</li>
-        <li> Advanced SEO & Analytics</li>
-        <li> 5 Months Free Support</li>
-        <li> Delivery in 10–14 Days</li>
-      </ul>
-      <a href="#contact" class="cta-button">Launch Online Store</a>
-    </div>
-  </div>
-</section>
-
-  <section id="contact" class="section fade-in">
-  <h2>Contact Us</h2>
-  <p>Let’s build something amazing together. Fill the form below and we’ll get in touch.</p>
-
-  <div class="form-card">
-    <form class="contact-form" action="https://formsubmit.co/innowebbuilds@gmail.com" method="POST">
-      <input type="hidden" name="_captcha" value="false">
-
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" name="name" id="name" placeholder="Full name" required>
+  <!-- Packages -->
+  <section class="packages">
+    <h2>Our Packages</h2>
+    <label class="switch">
+      <input type="checkbox" id="package-toggle">
+      <span class="slider"></span>
+    </label>
+    <div class="package-container">
+      <div id="informative-package" class="package active">
+        <h3>Informative Website</h3>
+        <p>Perfect for small businesses, blogs, and personal portfolios.</p>
       </div>
-
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" name="phone" id="phone" placeholder="Your number" required>
+      <div id="ecommerce-package" class="package">
+        <h3>E-commerce Website</h3>
+        <p>For businesses that need a robust online store with payment integration.</p>
       </div>
-
-      <div class="form-group">
-        <label for="websiteType">Website Type</label>
-        <select name="websiteType" id="websiteType" required>
-          <option value="" disabled selected>Select Website Type</option>
-          <option value="informative">Informative</option>
-          <option value="ecommerce">E-Commerce</option>
-          <option value="portfolio">Portfolio</option>
-          <option value="maintenance">Website Maintenance</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="brief">Business Brief</label>
-        <textarea name="brief" id="brief" rows="4" placeholder="Tell us about your business goals..." required></textarea>
-      </div>
-
-      <div class="form-group">
-  <label for="date">Preferred Call Date</label>
-  <input type="date" name="date" id="date">
-</div>
-
-      <div class="form-group">
-  <label for="time">Preferred Call Time</label>
-  <input type="time" name="time" id="time" required>
-</div>
-      
-      <button type="submit" class="cta-button">Submit</button>
-    </form>
-  </div>
-</section>
-  
-  <section class="section urgency-section">
-  <div class="urgency-box-clean">
-    <h3>⚡ Limited Offer</h3>
-    <p>Only <strong>3 spots</strong> left this month.<br>
-    Offer ends in <span id="countdown-timer"></span></p>
-    <a href="#contact" class="cta-button small">Claim Your Spot</a>
-  </div>
-</section>
-
-  
-
-  <section id="projects" class="section fade-in">
-    <h2>Websites We've Built</h2>
-    <div class="project-grid">
-      <a href="https://www.allnaturalslb.com" target="_blank" class="project-card">All Naturals lb</a>
-      <a href="https://www.ideasgen.ai" target="_blank" class="project-card">Ideas gen</a>
-      <a href="https://www.smilecitycenter.com" target="_blank" class="project-card">Smile City Center</a>
-      <a href="https://www.selfiesmaster.net" target="_blank" class="project-card">Selfies Master</a>
-      <a href="https://www.preaura.com" target="_blank" class="project-card">PreAura</a>
-      <a href="https://www.comikid.com" target="_blank" class="project-card">Comikid</a>
-      <a href="https://www.thecoolshoplb.com" target="_blank" class="project-card">The Cool Shop</a>
-      <a href="https://www.objectives.com.sa" target="_blank" class="project-card">Objectives KSA</a>
-      <a href="https://www.getyouchick.com" target="_blank" class="project-card">Get you chic</a>
-      <a href="https://www.cocoonpharma.co" target="_blank" class="project-card">Cocoon pharma</a>
     </div>
   </section>
 
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <textarea placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-  <section id="testimonials" class="section fade-in">
-  <h2>What Our Clients Say</h2>
-
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <i class="fas fa-star"></i>
-      <p>"Amazing work! Our website looks stunning and loads super fast. Highly recommend this team!"</p>
-      <span>- Sarah M., CEO at PreAura</span>
+  <!-- Projects -->
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project">Project 1</div>
+      <div class="project">Project 2</div>
+      <div class="project">Project 3</div>
     </div>
+  </section>
 
-    <div class="testimonial-card">
-      <i class="fas fa-thumbs-up"></i>
-      <p>"The team was professional and supportive from start to finish. A+ service."</p>
-      <span>- Jad K., Owner of The Cool Shop</span>
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <h2>What Clients Say</h2>
+    <div class="testimonial active">"Great work! Highly recommend."</div>
+    <div class="testimonial">"My website looks amazing!"</div>
+    <div class="testimonial">"Professional and fast delivery."</div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>We specialize in crafting modern, responsive websites that bring your business online.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Innovative Website Builds. All rights reserved.</p>
+    <div class="footer-contact">
+      <a href="tel:+96179122978"><i class="fas fa-phone"></i> +961 79 122 978</a>
+      <a href="mailto:innowebbuilds@gmail.com"><i class="fas fa-envelope"></i> innowebbuilds@gmail.com</a>
+      <a href="https://www.instagram.com/innowebbuilds/" target="_blank">
+        <i class="fab fa-instagram"></i> @innowebbuilds
+      </a>
     </div>
+  </footer>
 
-    <div class="testimonial-card">
-      <i class="fas fa-rocket"></i>
-      <p>"Our online store is now top-notch thanks to their expertise. Truly satisfied."</p>
-      <span>- Huda S., Objectives KSA</span>
-    </div>
-  </div>
-</section>
-
-<section id="about" class="section fade-in" data-aos="fade-up">
-  <h2 data-aos="fade-down" data-aos-delay="100">About InnoWebBuilds</h2>
-  <p data-aos="fade-up" data-aos-delay="300">
-    We build websites that go beyond “just looking good.” Our mission is to deliver digital experiences that are fast, mobile-friendly, and designed to help your business grow.
-  </p>
-  <ul class="power-points">
-    <li data-aos="fade-right" data-aos-delay="500">- Fast-loading, optimized websites</li>
-    <li data-aos="fade-right" data-aos-delay="600">- Fully responsive designs for mobile and desktop</li>
-    <li data-aos="fade-right" data-aos-delay="700">- SEO-optimized and conversion-focused</li>
-    <li data-aos="fade-right" data-aos-delay="800">- Hosting, maintenance, and ongoing support</li>
-  </ul>
-</section>
-
- <footer class="footer">
-  <p>&copy; 2024 Innovative Website Builds. All rights reserved.</p>
-
-  <div class="footer-contact">
-    <a href="tel:+96179122978"><i class="fas fa-phone"></i> +961 79 122 978</a>
-    <a href="mailto:innowebbuilds@gmail.com"><i class="fas fa-envelope"></i> innowebbuilds@gmail.com</a>
-    <a href="https://www.instagram.com/innowebbuilds/" target="_blank">
-      <i class="fab fa-instagram"></i> @innowebbuilds
-    </a>
-  </div>
-</footer>
-
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 800,
-    once: true
-  });
-</script>
-
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
 </body>
 </html>
-
-
-
-
