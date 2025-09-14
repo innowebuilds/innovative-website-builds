@@ -22,20 +22,49 @@
         window.location = url;
       }
     };
-    gtag('event', 'form_submit', {
-      'event_callback': callback,
-      'event_timeout': 2000,
-      // <event_parameters>
-    });
+    try {
+      if (typeof gtag === 'function') {
+        gtag('event', 'form_submit', {
+          'event_callback': callback,
+          'event_timeout': 2000,
+          // <event_parameters>
+        });
+      } else {
+        // if gtag is not ready yet, queue it for load
+        window.addEventListener('load', function () {
+          if (typeof gtag === 'function') {
+            gtag('event', 'form_submit', {
+              'event_callback': callback,
+              'event_timeout': 2000,
+            });
+          }
+        });
+      }
+    } catch (e) {
+      // don't let analytics break the page
+      console.warn('gtag not available yet', e);
+    }
     return false;
   }
 </script>
 
   <!-- Google tag (gtag.js) event -->
 <script>
-  gtag('event', 'page_view', {
-    // <event_parameters>
-  });
+  (function(){
+    try {
+      if (typeof gtag === 'function') {
+        gtag('event', 'page_view', {
+          // <event_parameters>
+        });
+      } else {
+        window.addEventListener('load', function(){
+          if (typeof gtag === 'function') gtag('event', 'page_view', {});
+        });
+      }
+    } catch (e) {
+      console.warn('gtag page_view skipped', e);
+    }
+  })();
 </script>
 
   <!-- Google tag (gtag.js) event - delayed navigation helper -->
@@ -48,11 +77,26 @@
         window.location = url;
       }
     };
-    gtag('event', 'click', {
-      'event_callback': callback,
-      'event_timeout': 2000,
-      // <event_parameters>
-    });
+    try {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click', {
+          'event_callback': callback,
+          'event_timeout': 2000,
+          // <event_parameters>
+        });
+      } else {
+        window.addEventListener('load', function () {
+          if (typeof gtag === 'function') {
+            gtag('event', 'click', {
+              'event_callback': callback,
+              'event_timeout': 2000,
+            });
+          }
+        });
+      }
+    } catch (e) {
+      console.warn('gtag click event skipped', e);
+    }
     return false;
   }
 </script>
@@ -96,10 +140,25 @@ function gtag_report_conversion(url) {
       window.location = url;
     }
   };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17403550908/ktN3CNidmokbELy51OpA',
-      'event_callback': callback
-  });
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', {
+          'send_to': 'AW-17403550908/ktN3CNidmokbELy51OpA',
+          'event_callback': callback
+      });
+    } else {
+      window.addEventListener('load', function(){
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-17403550908/ktN3CNidmokbELy51OpA',
+            'event_callback': callback
+          });
+        }
+      });
+    }
+  } catch (e) {
+    console.warn('gtag_report_conversion skipped', e);
+  }
   return false;
 }
 </script>
@@ -134,7 +193,7 @@ function gtag_report_conversion(url) {
   <!-- End Google Tag Manager (noscript) -->
 
   <!-- 🌌 Particle Background -->
-  <canvas id="bg-canvas"></canvas>
+  <canvas id="background-canvas"></canvas>
 
   <header class="header">
     <h1 class="logo">Innovative Website Builds</h1>
