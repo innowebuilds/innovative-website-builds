@@ -97,7 +97,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  height: 55vh;
   text-align: center;
   padding: 2rem;
   position: relative;
@@ -486,5 +486,6 @@ a {
   color: #ccc;
   line-height: 1.6;
 }
+
 
 
