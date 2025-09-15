@@ -91,6 +91,8 @@ a {
   }
 }
 
+
+/* Add this new block for the animated background behind hero content */
 .hero {
   display: flex;
   align-items: center;
@@ -101,11 +103,23 @@ a {
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
 
-  /* 🔥 Animated background */
+/* New hero background layer */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
   background: linear-gradient(-45deg, #1b1b1b, #243b55, #3093f0, #121212);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
+}
+
+/* Ensure hero content is above the background */
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 
@@ -472,4 +486,5 @@ a {
   color: #ccc;
   line-height: 1.6;
 }
+
 
