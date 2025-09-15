@@ -81,16 +81,13 @@ a {
     width: 100%;
     padding: 1rem;
   }
-
   .nav.show {
     display: flex;
   }
-
   #mobile-toggle {
     display: block;
   }
 }
-
 
 /* Add this new block for the animated background behind hero content */
 .hero {
@@ -122,8 +119,6 @@ a {
   z-index: 1;
 }
 
-
-
 .hero-content h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -131,38 +126,33 @@ a {
 
 .cta-button {
   position: relative;
-  background: #121212; /* Button inner background */
-  color: #fff;
-  border: none;
-  border-radius: 25px; /* MATCH radius with ::before */
+  display: inline-block;
   padding: 0.75rem 2rem;
   font-weight: 700;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
   overflow: hidden;
   z-index: 1;
-  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  background: linear-gradient(90deg, #3093f0 0%, #2ed8f7 100%);
+  box-shadow: 0 4px 16px rgba(48, 147, 240, 0.18);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
 }
 
 .cta-button::before {
   content: "";
   position: absolute;
-  inset: 0; /* cover button perfectly */
+  inset: 0;
   z-index: -1;
+  border-radius: 25px;
+  padding: 0;
+  margin: 0;
   background: linear-gradient(90deg, #3093f0, #2ed8f7, #3093f0);
   background-size: 200% 200%;
   animation: borderMove 2s linear infinite;
-  border-radius: 25px; /* MATCH radius with button */
-  padding: 0;
-  margin: 0;
-}
-
-/* Add a border "padding" effect, so the border shows up */
-.cta-button::after {
-  content: "";
-  position: absolute;
-  inset: 3px; /* Adjust width of border here */
-  background: #121212; /* Same as button background */
-  border-radius: 22px; /* 25px - 3px for nice fit */
-  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 @keyframes borderMove {
@@ -170,8 +160,10 @@ a {
 }
 
 .cta-button:hover {
-  background: #3093f0;
+  background: linear-gradient(90deg, #2ed8f7 0%, #3093f0 100%);
   color: #fff;
+  box-shadow: 0 0 0 4px #3093f055, 0 8px 24px #3093f033;
+  transform: translateY(-2px) scale(1.04);
 }
 
 .section {
@@ -239,13 +231,13 @@ a {
   box-shadow: 0 10px 25px rgba(48, 147, 240, 0.3);
 }
 
-.testimonial-card i {
+testimonial-card i {
   font-size: 1.8rem;
   color: var(--primary);
   margin-bottom: 1rem;
 }
 
-.testimonial-card p {
+testimonial-card p {
   font-size: 1rem;
   font-style: italic;
   color: #ddd;
@@ -253,13 +245,12 @@ a {
   margin-bottom: 1rem;
 }
 
-.testimonial-card span {
+testimonial-card span {
   display: block;
   font-weight: 500;
   font-size: 0.95rem;
   color: #bbb;
 }
-
 
 @keyframes fadeInUp {
   0% {
@@ -271,7 +262,6 @@ a {
     transform: translateY(0);
   }
 }
-
 
 /* Container Card */
 .form-card {
@@ -437,7 +427,6 @@ a {
   font-size: 1.1rem;
 }
 
-
 .package-type:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 30px rgba(48, 147, 240, 0.5);
@@ -473,7 +462,6 @@ a {
   background: linear-gradient(-45deg, #3093f0, #1a1a1a, #243b55, #121212);
   background-size: 400% 400%;
   animation: gradientMove 10s ease infinite;
-
   padding: 2.5rem;
   border-radius: 16px;
   text-align: center;
@@ -514,8 +502,3 @@ a {
   color: #ccc;
   line-height: 1.6;
 }
-
-
-
-
-
