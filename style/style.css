@@ -131,28 +131,33 @@ a {
 
 .cta-button {
   position: relative;
-  background: #121212; /* Button inner background */
-  color: #fff;
-  border: none;
-  border-radius: 25px; /* MATCH radius with ::before */
+  display: inline-block;
   padding: 0.75rem 2rem;
   font-weight: 700;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
   overflow: hidden;
   z-index: 1;
-  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  background: linear-gradient(90deg, #3093f0 0%, #2ed8f7 100%);
+  box-shadow: 0 4px 16px rgba(48, 147, 240, 0.18);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
 }
 
 .cta-button::before {
   content: "";
   position: absolute;
-  inset: 0; /* cover button perfectly */
+  inset: 0;
   z-index: -1;
+  border-radius: 25px;
+  padding: 0;
+  margin: 0;
   background: linear-gradient(90deg, #3093f0, #2ed8f7, #3093f0);
   background-size: 200% 200%;
   animation: borderMove 2s linear infinite;
-  border-radius: 25px; /* MATCH radius with button */
-  padding: 0;
-  margin: 0;
+  opacity: 0.5; /* subtle border overlay effect */
+  pointer-events: none;
 }
 
 /* Add a border "padding" effect, so the border shows up */
@@ -170,8 +175,10 @@ a {
 }
 
 .cta-button:hover {
-  background: #3093f0;
+  background: linear-gradient(90deg, #2ed8f7 0%, #3093f0 100%);
   color: #fff;
+  box-shadow: 0 0 0 4px #3093f055, 0 8px 24px #3093f033;
+  transform: translateY(-2px) scale(1.04);
 }
 
 .section {
