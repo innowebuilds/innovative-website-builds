@@ -599,55 +599,6 @@ a {
   text-decoration: none;
 }
 
-.header {
-  background: var(--accent);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 6px var(--shadow);
-}
-
-.logo {
-  font-weight: 800;
-  font-size: 1.5rem;
-}
-
-.nav {
-  display: flex;
-  gap: 1.5rem;
-}
-
-#mobile-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--primary);
-  font-size: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background: var(--accent);
-    width: 100%;
-    padding: 1rem;
-  }
-  .nav.show {
-    display: flex;
-  }
-  #mobile-toggle {
-    display: block;
-  }
-}
-
 /* Add this new block for the animated background behind hero content */
 .hero {
   display: flex;
