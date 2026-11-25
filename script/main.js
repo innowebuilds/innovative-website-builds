@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Subtle reveal on scroll; content is visible if JS or observers are unavailable
-  var targets = document.querySelectorAll('.section-head, .work-card, .service, .process li, .plan, .about > *, .contact-grid > *');
+  var targets = document.querySelectorAll('.section-head, .work-card, .service, .step, .plan, .about > *, .contact-grid > *');
   if ('IntersectionObserver' in window) {
     targets.forEach(function (el) { el.classList.add('reveal'); });
     var io = new IntersectionObserver(function (entries) {
@@ -58,5 +58,50 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }, { rootMargin: '0px 0px -8% 0px' });
     targets.forEach(function (el) { io.observe(el); });
+  }
+
+  var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 3D tilt and light-follow on service cards
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--ry', ((px - 0.5) * 10).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', ((0.5 - py) * 10).toFixed(2) + 'deg');
+        card.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
+
+  // Process timeline fills as the section scrolls into view
+  var wrap = document.querySelector('.process-wrap');
+  if (wrap) {
+    var steps = wrap.querySelectorAll('.step');
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var r = wrap.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = (vh * 0.75 - r.top) / (r.height + vh * 0.1);
+      p = Math.max(0, Math.min(1, p));
+      wrap.style.setProperty('--progress', p.toFixed(3));
+      steps.forEach(function (st, i) {
+        st.classList.toggle('active', p >= (i / steps.length) + 0.02);
+      });
+    };
+    if (reduceMotion) { wrap.style.setProperty('--progress', '1'); steps.forEach(function (st) { st.classList.add('active'); }); }
+    else {
+      window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
   }
 });
