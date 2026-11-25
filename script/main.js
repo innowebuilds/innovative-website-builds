@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Subtle reveal on scroll; content is visible if JS or observers are unavailable
-  var targets = document.querySelectorAll('.section-head, .work-list li, .service, .process li, .plan, .quote, .about > *, .contact-grid > *');
+  var targets = document.querySelectorAll('.section-head, .work-card, .service, .process li, .plan, .about > *, .contact-grid > *');
   if ('IntersectionObserver' in window) {
     targets.forEach(function (el) { el.classList.add('reveal'); });
     var io = new IntersectionObserver(function (entries) {
