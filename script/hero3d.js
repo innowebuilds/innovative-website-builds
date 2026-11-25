@@ -1,11 +1,11 @@
-/* Hero background: lit, glass-like 3D shapes (code glyphs and solids) floating
-   in depth over a dark gradient. Plain canvas 2D, no libraries.
-   Pauses off screen or in a hidden tab; one still frame for reduced motion. */
+/* Site background: lit, glass-like 3D shapes (code glyphs and solids) floating
+   in depth on one fixed canvas behind every section. Plain canvas 2D, no libraries.
+   Shapes drift with scroll (parallax) and dim below the hero so text stays readable.
+   Pauses in a hidden tab, runs at 30fps on phones, one still frame for reduced motion. */
 (function () {
-  var canvas = document.getElementById('hero-canvas');
+  var canvas = document.getElementById('bg-canvas');
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext('2d');
-  var hero = canvas.parentElement;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- mesh helpers: a mesh is { v: [[x,y,z]...], f: [[i,j,k,l]...] } ----------
@@ -130,16 +130,19 @@
     for (var i = 0; i < n; i++) dust.push({ x: Math.random(), y: Math.random(), z: Math.random(), s: 0.004 + Math.random() * 0.01, p: Math.random() * 6.28 });
   }
 
-  function resize() {
-    var r = hero.getBoundingClientRect();
-    W = r.width; H = r.height;
+  var scrollY = 0;
+  function resize(force) {
+    var w = window.innerWidth, h = window.innerHeight;
+    // Phones change height when the address bar hides; ignore small height-only changes.
+    if (!force && w === W && Math.abs(h - H) < 160) return false;
+    var widthChanged = w !== W;
+    W = w; H = h;
     mobile = W < 760;
-    dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2);
+    dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.75);
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    build();
+    if (widthChanged || force) build();
+    return true;
   }
 
   function drawShape(it, t) {
@@ -152,7 +155,11 @@
     var unit = Math.min(W, H) * (mobile ? 0.09 : 0.085);
     var par = 1 + it.z;
     var ox = W / 2 + it.x * W * (mobile ? 0.5 : 0.47) + mouse.x * 22 * par;
-    var oy = H / 2 + it.y * H * (mobile ? 0.47 : 0.44) + Math.sin(t * 0.6 + it.phase) * 7 + mouse.y * 14 * par;
+    // parallax: nearer shapes move faster against the scroll, then wrap around
+    var span = H * 1.4;
+    var baseY = H / 2 + it.y * H * (mobile ? 0.47 : 0.44) - scrollY * (0.12 + 0.16 * (it.z + 0.5));
+    baseY = ((baseY + H * 0.2) % span + span) % span - H * 0.2;
+    var oy = baseY + Math.sin(t * 0.6 + it.phase) * 7 + mouse.y * 14 * par;
     var size = unit * it.k * (1 + it.z * 0.3);
     var cam = 6;
 
@@ -212,6 +219,9 @@
   function draw(t) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
+    // full strength over the hero, softer behind the content below it
+    var fade = Math.min(1, scrollY / (H * 0.8));
+    ctx.globalAlpha = 1 - fade * (mobile ? 0.6 : 0.5);
     mouse.x += (mouse.tx - mouse.x) * 0.05;
     mouse.y += (mouse.ty - mouse.y) * 0.05;
 
@@ -231,28 +241,35 @@
     for (i = 0; i < order.length; i++) drawShape(order[i], t);
   }
 
-  var running = false, visible = true, start = performance.now(), raf = 0;
+  var running = false, start = performance.now(), raf = 0, last = 0;
   function loop(now) {
     if (!running) return;
-    draw((now - start) / 1000);
     raf = requestAnimationFrame(loop);
+    if (mobile && now - last < 32) return; // ~30fps on phones
+    last = now;
+    draw((now - start) / 1000);
   }
   function play() {
-    if (reduce || running || !visible || document.hidden) return;
+    if (reduce || running || document.hidden) return;
     running = true;
     raf = requestAnimationFrame(loop);
   }
   function pause() { running = false; cancelAnimationFrame(raf); }
 
-  resize();
+  scrollY = window.scrollY || 0;
+  resize(true);
   draw(2);
   canvas.classList.add('ready');
 
   var rt;
   window.addEventListener('resize', function () {
     clearTimeout(rt);
-    rt = setTimeout(function () { resize(); draw((performance.now() - start) / 1000); }, 150);
+    rt = setTimeout(function () { if (resize(false) && !running) draw((performance.now() - start) / 1000); }, 150);
   });
+  window.addEventListener('scroll', function () {
+    scrollY = window.scrollY || 0;
+    if (reduce) draw(2);
+  }, { passive: true });
   if (reduce) return;
 
   window.addEventListener('pointermove', function (e) {
@@ -260,12 +277,6 @@
     mouse.tx = (e.clientX / window.innerWidth - 0.5) * 2;
     mouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
   }, { passive: true });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
-      if (visible) play(); else pause();
-    }).observe(hero);
-  }
   document.addEventListener('visibilitychange', function () { if (document.hidden) pause(); else play(); });
   play();
 })();
