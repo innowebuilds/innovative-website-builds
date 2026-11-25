@@ -22,9 +22,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style/style.css?v=20261125b" />
-  <script defer src="script/main.js?v=20261125b"></script>
-  <script defer src="script/hero3d.js?v=20261125b"></script>
+  <link rel="stylesheet" href="style/style.css?v=20261125c" />
+  <script defer src="script/main.js?v=20261125c"></script>
+  <script defer src="script/hero3d.js?v=20261125c"></script>
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -105,8 +105,10 @@
 
   <main id="main">
     <!-- Hero -->
-    <section class="hero" id="hero">
+    <section class="hero hero-dark" id="hero">
       <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="hero-grid" aria-hidden="true"></div>
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-inner">
         <p class="eyebrow hero-eyebrow"><span class="dot" aria-hidden="true"></span>Web design &amp; development studio</p>
@@ -248,59 +250,75 @@
     </section>
 
     <!-- Pricing -->
-    <section id="pricing" class="section section-alt">
+    <section id="pricing" class="section section-alt pricing">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head section-head-center">
           <p class="eyebrow">Pricing</p>
           <h2>Transparent starting prices. Final quote after discovery.</h2>
         </div>
         <div class="plans">
           <article class="plan">
-            <h3>Business website</h3>
-            <p class="plan-price"><span>From</span> $600</p>
-            <p class="plan-time">Delivered in 5 to 7 days</p>
-            <ul>
-              <li>Up to 5 pages</li>
-              <li>Custom or template-based design</li>
-              <li>Optional CMS for editing content</li>
-              <li>Responsive and SEO-ready</li>
-              <li>Contact form with email delivery</li>
-              <li>5 months of support included</li>
-            </ul>
-            <a href="#contact" class="btn btn-ghost" data-plan="informative">Start a business website</a>
+            <div class="plan-inner">
+              <div class="plan-head">
+                <h3>Business website</h3>
+                <p class="plan-fit">For service businesses, clinics and professionals</p>
+              </div>
+              <p class="plan-price"><span class="plan-from">From</span><span class="plan-amount"><sup>$</sup>600</span></p>
+              <p class="plan-time"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4.2l2.8 1.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Delivered in 5 to 7 days</p>
+              <a href="#contact" class="btn btn-ghost plan-cta" data-plan="informative">Start a business website<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <p class="plan-includes">What's included</p>
+              <ul><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Up to 5 pages</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom or template-based design</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Optional CMS for editing content</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Responsive and SEO-ready</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Contact form with email delivery</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 months of support included</span></li></ul>
+            </div>
           </article>
           <article class="plan plan-featured">
-            <h3>E-commerce store</h3>
-            <p class="plan-price"><span>From</span> $500</p>
-            <p class="plan-time">Delivered in 10 to 14 days</p>
-            <ul>
-              <li>Unlimited pages and products</li>
-              <li>Custom design with admin dashboard</li>
-              <li>Product and order management</li>
-              <li>Advanced SEO and analytics</li>
-              <li>5 months of support included</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary" data-plan="ecommerce">Start an online store</a>
+            <div class="plan-inner">
+              <div class="plan-head">
+                <h3>E-commerce store</h3>
+                <p class="plan-fit">For brands selling products online</p>
+              </div>
+              <p class="plan-price"><span class="plan-from">From</span><span class="plan-amount"><sup>$</sup>500</span></p>
+              <p class="plan-time"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4.2l2.8 1.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Delivered in 10 to 14 days</p>
+              <a href="#contact" class="btn btn-light plan-cta" data-plan="ecommerce">Start an online store<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <p class="plan-includes">What's included</p>
+              <ul><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Unlimited pages and products</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom design with admin dashboard</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Product and order management</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Advanced SEO and analytics</span></li><li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 months of support included</span></li></ul>
+            </div>
           </article>
         </div>
+        <p class="plans-note">Prices are starting points. You get a fixed quote after a free discovery call.</p>
       </div>
     </section>
 
     <!-- About -->
-    <section id="about" class="section">
+    <section id="about" class="section about-section">
       <div class="container about">
-        <div>
+        <div class="about-copy">
           <p class="eyebrow">About</p>
           <h2>We build websites that do more than look good.</h2>
-        </div>
-        <div class="about-body">
-          <p>Our mission is to deliver websites that are fast, easy to use on any device, and designed to help your business grow. We handle the full journey, from planning and design to launch, hosting and support.</p>
-          <ul class="ticks">
-            <li>Fast-loading, optimised builds</li>
-            <li>Designed for mobile first, refined for desktop</li>
-            <li>SEO foundations and analytics set up from day one</li>
-            <li>Hosting, maintenance and ongoing support</li>
+          <p class="about-lead">Our mission is to deliver websites that are fast, easy to use on any device, and designed to help your business grow. We handle the full journey, from planning and design to launch, hosting and support.</p>
+          <ul class="about-tiles">
+            <li class="about-tile"><span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8Z"/></svg></span><span>Fast-loading, optimised builds</span></li>
+            <li class="about-tile"><span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span><span>Designed for mobile first, refined for desktop</span></li>
+            <li class="about-tile"><span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span>SEO foundations and analytics set up from day one</span></li>
+            <li class="about-tile"><span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="m5.6 5.6 3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9"/></svg></span><span>Hosting, maintenance and ongoing support</span></li>
           </ul>
+          <a href="#contact" class="btn btn-primary about-cta">Start a project<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="about-visual" aria-hidden="true">
+          <div class="code-window">
+            <div class="code-bar"><span></span><span></span><span></span><em>your-business.html</em></div>
+<pre class="code"><code><i class="c">// how we build every site</i>
+<b>const</b> <u>website</u> = <s>build</s>({
+  design:   <var>'custom'</var>,
+  mobile:   <var>'first'</var>,
+  speed:    <var>'fast'</var>,
+  seo:      <var>'ready'</var>,
+  support:  <var>'ongoing'</var>,
+});
+
+<u>website</u>.<s>launch</s>();<span class="caret"></span></code></pre>
+          </div>
+          <div class="float-card float-card-a"><span class="pulse-dot"></span>Live &amp; online</div>
+          <div class="float-card float-card-b"><svg viewBox="0 0 20 20" fill="none"><path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobile-ready</div>
         </div>
       </div>
     </section>
