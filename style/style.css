@@ -111,6 +111,7 @@ p { margin: 0; }
 /* Work */
 .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(32px, 4vw, 48px) 32px; }
 .work-card { text-decoration: none; display: block; }
+.work-card-featured { grid-column: 1 / -1; }
 .work-shot {
   aspect-ratio: 1200 / 532; overflow: hidden; border-radius: var(--radius);
   background: var(--bg-alt); border: 1px solid var(--line);
