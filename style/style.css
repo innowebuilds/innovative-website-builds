@@ -476,3 +476,8 @@ p { margin: 0; }
   .service-inner, .step-card, .service-icon { transition: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* Phones: keep the hero lights still so the blur is painted once (same look, smoother scrolling) */
+@media (max-width: 820px) {
+  .hero-aurora span { animation: none; will-change: auto; }
+}
