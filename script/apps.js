@@ -1,66 +1,58 @@
 /*
- * Applications slider: edit this list to change the slides.
+ * Applications section: each entry is one app card. Clicking a card opens a
+ * gallery of that app's screens.
  *
- * To add a real app:
- *   1. Put the image in assets/apps/ (WebP, about 2000 px wide, is ideal).
- *   2. Set `image` to its path and write a short `alt` text.
- * A slide with an empty `image` shows the built-in placeholder.
+ * To add an app:
+ *   1. Put its images in assets/apps/ (WebP, about 2000 px wide, is ideal).
+ *   2. Copy an entry below and fill it in. The first screen is used as the card image.
+ * An app with no screens yet shows a "Preview coming soon" card.
  *
- * Fields:
+ * App fields:
  *   name        App name (required)
- *   category    Short label shown above the name, e.g. "Booking app"
+ *   category    Short label shown above the name, e.g. "Healthcare SaaS"
  *   description One or two sentences about what the app does
- *   platforms   Tags shown under the description, e.g. ['iOS', 'Android']
- *   image       Path to the image, e.g. 'assets/apps/clinic-booking.webp'
- *   alt         What the image shows, for screen readers
- *   link        Optional URL (App Store, Google Play or live web app)
- *   linkLabel   Optional button text, defaults to "View app"
- *   background  Optional colour behind the image, matched to the image's edges
+ *   platforms   Tags shown on the card, e.g. ['iOS', 'Android']
+ *   background  Optional colour behind the images, matched to their edges
+ *   screens     List of { image, title, caption, alt } shown in the gallery
  */
 window.IWB_APPS = [
   {
     name: 'Smile City Center Clinic System',
-    category: 'Case study \u00b7 Healthcare SaaS',
+    category: 'Healthcare SaaS',
     description: 'A complete dental clinic platform: appointments, patient files with dental charts, billing, reports, reminders and voice entry in three languages.',
-    platforms: ['Next.js 15', 'Cloudflare Workers', 'D1 \u00b7 Prisma', 'Responsive', 'EN \u00b7 FR \u00b7 AR voice'],
-    image: 'assets/apps/smile-clinic-cover.webp',
-    alt: 'Smile City Center Clinic System shown on a desktop browser and two phones',
-    background: '#F6F8FB'
-  },
-  {
-    name: 'Daily dashboard',
-    category: 'Smile City Center \u00b7 Clinic System',
-    description: "Today's visits, waiting room, collections and no-show rate at a glance.",
-    platforms: ['Desktop'],
-    image: 'assets/apps/smile-clinic-dashboard.webp',
-    alt: 'Clinic dashboard with visits today, monthly collections, unpaid balances, today\'s schedule and waiting room',
-    background: '#F6F8FB'
-  },
-  {
-    name: 'Interactive dental chart',
-    category: 'Smile City Center \u00b7 Clinic System',
-    description: 'FDI chart with nine conditions, colour-coded and editable by doctors.',
-    platforms: ['Desktop', 'Tablet'],
-    image: 'assets/apps/smile-clinic-dental-chart.webp',
-    alt: 'Patient profile with a medical alert and a colour-coded FDI dental chart',
-    background: '#F6F8FB'
-  },
-  {
-    name: 'Fill by voice',
-    category: 'Smile City Center \u00b7 Clinic System',
-    description: 'Speak in English, French or Arabic and the form fills itself for review.',
-    platforms: ['English', 'Fran\u00e7ais', 'Arabic'],
-    image: 'assets/apps/smile-clinic-voice.webp',
-    alt: 'New patient form filled automatically from a spoken sentence, with each detected field highlighted',
-    background: '#F6F8FB'
-  },
-  {
-    name: 'Patient care in your pocket',
-    category: 'Smile City Center \u00b7 Clinic System',
-    description: 'Profile with medical alert, dental chart and calendar.',
-    platforms: ['iOS', 'Android', 'Mobile web'],
-    image: 'assets/apps/smile-clinic-mobile.webp',
-    alt: 'Three phone screens showing a patient profile, a dental chart and the doctors\' day calendar',
-    background: '#F6F8FB'
+    platforms: ['Next.js 15', 'Cloudflare Workers', 'D1 · Prisma', 'EN · FR · AR voice'],
+    background: '#F6F8FB',
+    screens: [
+      {
+        image: 'assets/apps/smile-clinic-cover.webp',
+        title: 'Smile City Center Clinic System',
+        caption: 'Desktop and mobile, with appointments, patient files, billing and reminders.',
+        alt: 'Smile City Center Clinic System shown on a desktop browser and two phones'
+      },
+      {
+        image: 'assets/apps/smile-clinic-dashboard.webp',
+        title: 'Daily dashboard',
+        caption: "Today's visits, waiting room, collections and no-show rate at a glance.",
+        alt: "Clinic dashboard with visits today, monthly collections, unpaid balances, today's schedule and waiting room"
+      },
+      {
+        image: 'assets/apps/smile-clinic-dental-chart.webp',
+        title: 'Interactive dental chart',
+        caption: 'FDI chart with nine conditions, colour-coded and editable by doctors.',
+        alt: 'Patient profile with a medical alert and a colour-coded FDI dental chart'
+      },
+      {
+        image: 'assets/apps/smile-clinic-voice.webp',
+        title: 'Fill by voice',
+        caption: 'Speak in English, French or Arabic and the form fills itself for review.',
+        alt: 'New patient form filled automatically from a spoken sentence, with each detected field highlighted'
+      },
+      {
+        image: 'assets/apps/smile-clinic-mobile.webp',
+        title: 'Patient care in your pocket',
+        caption: 'Profile with medical alert, dental chart and calendar.',
+        alt: "Three phone screens showing a patient profile, a dental chart and the doctors' day calendar"
+      }
+    ]
   }
 ];

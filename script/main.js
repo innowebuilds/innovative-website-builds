@@ -105,154 +105,113 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Applications slider (slides are defined in script/apps.js)
-  var appsTrack = document.getElementById('apps-track');
+  // Applications: app cards (defined in script/apps.js), each opening a gallery of its screens
+  var appsGrid = document.getElementById('apps-grid');
   var apps = window.IWB_APPS || [];
-  if (appsTrack && apps.length) {
-    var appsSection = document.getElementById('apps');
-    var dotsWrap = document.getElementById('apps-dots');
-    var prevBtn = document.getElementById('apps-prev');
-    var nextBtn = document.getElementById('apps-next');
-    var curEl = document.getElementById('apps-current');
-    var totEl = document.getElementById('apps-total');
-    var bar = document.getElementById('apps-bar');
-    var status = document.getElementById('apps-status');
-    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  if (appsGrid) {
     var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
-    var placeholder = function () {
-      var ph = el('div', 'app-ph');
-      ph.setAttribute('aria-hidden', 'true');
-      for (var k = 0; k < 3; k++) {
-        var phone = el('div', 'app-ph-phone');
-        var screen = el('div', 'app-ph-screen');
-        ['app-ph-bar w60', 'app-ph-card', 'app-ph-bar w80', 'app-ph-bar w40', 'app-ph-row'].forEach(function (c) { screen.appendChild(el('span', c)); });
-        phone.appendChild(screen);
-        ph.appendChild(phone);
-      }
-      ph.appendChild(el('span', 'app-ph-chip', 'Preview coming soon'));
-      return ph;
-    };
-    // Full-size image viewer
     var viewer = document.getElementById('apps-viewer');
-    var openViewer = function (app) {
-      if (!viewer || typeof viewer.showModal !== 'function') { window.open(app.image, '_blank', 'noopener'); return; }
-      var vImg = viewer.querySelector('img');
-      vImg.src = app.image; vImg.alt = app.alt || app.name;
-      viewer.querySelector('.apps-viewer-title').textContent = app.name;
+    var vImg = viewer ? viewer.querySelector('#apps-viewer-stage img') : null;
+    var vTitle = document.getElementById('apps-viewer-title');
+    var vCount = document.getElementById('apps-viewer-count');
+    var vCaption = document.getElementById('apps-viewer-caption');
+    var vPrev = document.getElementById('apps-viewer-prev');
+    var vNext = document.getElementById('apps-viewer-next');
+    var vApp = null, vIndex = 0;
+
+    var show = function (i) {
+      var list = vApp.screens;
+      vIndex = Math.max(0, Math.min(list.length - 1, i));
+      var sc = list[vIndex];
+      vImg.src = sc.image;
+      vImg.alt = sc.alt || sc.title || vApp.name;
+      vCount.textContent = (vIndex + 1) + ' / ' + list.length;
+      vCaption.textContent = '';
+      if (sc.title) { vCaption.appendChild(el('strong', '', sc.title)); }
+      if (sc.caption) { vCaption.appendChild(el('span', '', (sc.title ? ' — ' : '') + sc.caption)); }
+      vPrev.disabled = vIndex === 0;
+      vNext.disabled = vIndex === list.length - 1;
+      vPrev.hidden = vNext.hidden = list.length < 2;
+      // Warm the next image so stepping through feels instant
+      if (list[vIndex + 1]) { var pre = new Image(); pre.src = list[vIndex + 1].image; }
+    };
+    var openGallery = function (app, i) {
+      if (!viewer || typeof viewer.showModal !== 'function') { window.open(app.screens[i || 0].image, '_blank', 'noopener'); return; }
+      vApp = app;
+      vTitle.textContent = app.name;
+      viewer.querySelector('.apps-viewer-stage').style.background = app.background || '';
+      show(i || 0);
       viewer.showModal();
-      viewer.scrollTop = 0;
-      vImg.decode ? vImg.decode().then(function () { viewer.scrollLeft = (viewer.scrollWidth - viewer.clientWidth) / 2; }, function () {}) : null;
     };
     if (viewer) {
-      viewer.querySelector('.apps-viewer-close').addEventListener('click', function () { viewer.close(); });
+      vPrev.addEventListener('click', function () { show(vIndex - 1); });
+      vNext.addEventListener('click', function () { show(vIndex + 1); });
+      document.getElementById('apps-viewer-close').addEventListener('click', function () { viewer.close(); });
       viewer.addEventListener('click', function (e) { if (e.target === viewer) viewer.close(); });
+      viewer.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); show(vIndex + 1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); show(vIndex - 1); }
+      });
+      // Swipe between screens on touch screens
+      var sx = null, sy = null;
+      var stage = document.getElementById('apps-viewer-stage');
+      stage.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+      stage.addEventListener('touchend', function (e) {
+        if (sx === null) return;
+        var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(vIndex + (dx < 0 ? 1 : -1));
+        sx = null;
+      }, { passive: true });
     }
-    var slides = [], dots = [];
-    apps.forEach(function (app, i) {
-      var li = el('li', 'app-slide');
-      li.setAttribute('role', 'group');
-      li.setAttribute('aria-roledescription', 'slide');
-      li.setAttribute('aria-label', (i + 1) + ' of ' + apps.length + ': ' + app.name);
-      var stage = el('div', 'app-stage');
-      if (app.image) {
+
+    apps.forEach(function (app) {
+      var screens = app.screens || [];
+      var li = el('li', 'app-card');
+      var thumb;
+      if (screens.length) {
+        thumb = el('button', 'app-thumb');
+        thumb.type = 'button';
+        thumb.setAttribute('aria-label', 'Open ' + app.name + ' gallery, ' + screens.length + (screens.length === 1 ? ' screen' : ' screens'));
+        if (app.background) thumb.style.background = app.background;
         var img = new Image();
-        img.src = app.image;
-        img.alt = app.alt || (app.name + ' app screens');
+        img.src = screens[0].image;
+        img.alt = '';
         img.loading = 'lazy';
         img.decoding = 'async';
-        if (i > 0) img.loading = 'lazy'; else img.removeAttribute('loading');
-        if (app.background) stage.style.background = app.background;
-        stage.classList.add('has-image');
-        var zoom = el('button', 'app-zoom');
-        zoom.type = 'button';
-        zoom.setAttribute('aria-label', 'Enlarge image: ' + app.name);
-        zoom.appendChild(img);
-        zoom.appendChild(el('span', 'app-zoom-hint', 'View full size'));
-        zoom.addEventListener('click', function () { openViewer(app); });
-        stage.appendChild(zoom);
+        thumb.appendChild(img);
+        thumb.appendChild(el('span', 'app-count', screens.length + (screens.length === 1 ? ' screen' : ' screens')));
+        thumb.addEventListener('click', function () { openGallery(app, 0); });
       } else {
-        stage.classList.add('is-placeholder');
-        stage.appendChild(placeholder());
+        thumb = el('div', 'app-thumb is-empty');
+        thumb.appendChild(el('span', 'app-empty', 'Preview coming soon'));
       }
-      var meta = el('div', 'app-meta');
-      var title = el('div', 'app-title');
-      if (app.category) title.appendChild(el('p', 'app-cat', app.category));
-      title.appendChild(el('h3', '', app.name));
       var body = el('div', 'app-body');
+      if (app.category) body.appendChild(el('p', 'app-cat', app.category));
+      body.appendChild(el('h3', '', app.name));
       if (app.description) body.appendChild(el('p', 'app-desc', app.description));
       if (app.platforms && app.platforms.length) {
         var tags = el('ul', 'app-tags');
         app.platforms.forEach(function (t) { tags.appendChild(el('li', '', t)); });
         body.appendChild(tags);
       }
-      if (app.link) {
-        var a = el('a', 'app-link', (app.linkLabel || 'View app') + ' ↗');
-        a.href = app.link; a.target = '_blank'; a.rel = 'noopener';
-        body.appendChild(a);
+      if (screens.length) {
+        var open = el('button', 'app-open', 'View screens →');
+        open.type = 'button';
+        open.addEventListener('click', function () { openGallery(app, 0); });
+        body.appendChild(open);
       }
-      meta.appendChild(title); meta.appendChild(body);
-      li.appendChild(stage); li.appendChild(meta);
-      appsTrack.appendChild(li);
-      slides.push(li);
-
-      var dot = el('button', 'apps-dot');
-      dot.type = 'button';
-      dot.setAttribute('aria-label', 'Show application ' + (i + 1) + ': ' + app.name);
-      dot.addEventListener('click', function () { go(i); });
-      dotsWrap.appendChild(dot);
-      dots.push(dot);
+      li.appendChild(thumb); li.appendChild(body);
+      appsGrid.appendChild(li);
     });
-    if (totEl) totEl.textContent = pad(apps.length);
-    if (apps.length < 2) appsSection.classList.add('apps-single');
 
-    // On phones the track takes the active slide's height, so a long caption doesn't leave a gap under short ones
-    var phone = window.matchMedia('(max-width: 600px)');
-    var fitHeight = function () {
-      if (phone.matches && slides[current]) appsTrack.style.height = (slides[current].offsetHeight + 12) + 'px';
-      else appsTrack.style.height = '';
-    };
-    window.addEventListener('resize', fitHeight);
-    var current = -1;
-    var setActive = function (i, announce) {
-      if (i === current) return;
-      current = i;
-      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
-      dots.forEach(function (d, k) { if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
-      if (curEl) curEl.textContent = pad(i + 1);
-      if (bar) bar.style.transform = 'scaleX(' + ((i + 1) / apps.length) + ')';
-      prevBtn.disabled = i === 0;
-      nextBtn.disabled = i === apps.length - 1;
-      fitHeight();
-      if (announce && status) status.textContent = 'Application ' + (i + 1) + ' of ' + apps.length + ': ' + apps[i].name;
-    };
-    var go = function (i) {
-      i = Math.max(0, Math.min(apps.length - 1, i));
-      var s = slides[i];
-      var left = s.offsetLeft - parseFloat(getComputedStyle(appsTrack).paddingLeft || 0);
-      appsTrack.scrollTo({ left: left, behavior: reduceMotion ? 'auto' : 'smooth' });
-      setActive(i, true);
-    };
-    var nearest = function () {
-      var base = parseFloat(getComputedStyle(appsTrack).paddingLeft || 0);
-      var x = appsTrack.scrollLeft, best = 0, bestD = Infinity;
-      slides.forEach(function (s, k) { var d = Math.abs(s.offsetLeft - base - x); if (d < bestD) { bestD = d; best = k; } });
-      if (appsTrack.scrollLeft + appsTrack.clientWidth >= appsTrack.scrollWidth - 2) best = slides.length - 1;
-      return best;
-    };
-    var raf = false;
-    appsTrack.addEventListener('scroll', function () {
-      if (raf) return; raf = true;
-      requestAnimationFrame(function () { raf = false; setActive(nearest(), false); });
-    }, { passive: true });
-    prevBtn.addEventListener('click', function () { go(current - 1); });
-    nextBtn.addEventListener('click', function () { go(current + 1); });
-    appsTrack.addEventListener('keydown', function (e) {
-      if (e.target !== appsTrack) return;
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
-      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
-      else if (e.key === 'Home') { e.preventDefault(); go(0); }
-      else if (e.key === 'End') { e.preventDefault(); go(apps.length - 1); }
-    });
-    setActive(0, false);
+    // Closing card invites the next app project
+    var next = el('li', 'app-card app-card-next');
+    next.appendChild(el('p', 'app-cat', 'Your app next'));
+    next.appendChild(el('h3', '', 'Have an app in mind?'));
+    next.appendChild(el('p', '', 'From clinic systems to booking platforms, we design and build apps that teams use every day.'));
+    var cta = el('a', 'btn btn-primary', 'Start a project');
+    cta.href = '#contact';
+    next.appendChild(cta);
+    appsGrid.appendChild(next);
   }
 });
