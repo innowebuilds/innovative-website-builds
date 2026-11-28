@@ -132,6 +132,21 @@ document.addEventListener('DOMContentLoaded', function () {
       ph.appendChild(el('span', 'app-ph-chip', 'Preview coming soon'));
       return ph;
     };
+    // Full-size image viewer
+    var viewer = document.getElementById('apps-viewer');
+    var openViewer = function (app) {
+      if (!viewer || typeof viewer.showModal !== 'function') { window.open(app.image, '_blank', 'noopener'); return; }
+      var vImg = viewer.querySelector('img');
+      vImg.src = app.image; vImg.alt = app.alt || app.name;
+      viewer.querySelector('.apps-viewer-title').textContent = app.name;
+      viewer.showModal();
+      viewer.scrollTop = 0;
+      vImg.decode ? vImg.decode().then(function () { viewer.scrollLeft = (viewer.scrollWidth - viewer.clientWidth) / 2; }, function () {}) : null;
+    };
+    if (viewer) {
+      viewer.querySelector('.apps-viewer-close').addEventListener('click', function () { viewer.close(); });
+      viewer.addEventListener('click', function (e) { if (e.target === viewer) viewer.close(); });
+    }
     var slides = [], dots = [];
     apps.forEach(function (app, i) {
       var li = el('li', 'app-slide');
@@ -145,7 +160,16 @@ document.addEventListener('DOMContentLoaded', function () {
         img.alt = app.alt || (app.name + ' app screens');
         img.loading = 'lazy';
         img.decoding = 'async';
-        stage.appendChild(img);
+        if (i > 0) img.loading = 'lazy'; else img.removeAttribute('loading');
+        if (app.background) stage.style.background = app.background;
+        stage.classList.add('has-image');
+        var zoom = el('button', 'app-zoom');
+        zoom.type = 'button';
+        zoom.setAttribute('aria-label', 'Enlarge image: ' + app.name);
+        zoom.appendChild(img);
+        zoom.appendChild(el('span', 'app-zoom-hint', 'View full size'));
+        zoom.addEventListener('click', function () { openViewer(app); });
+        stage.appendChild(zoom);
       } else {
         stage.classList.add('is-placeholder');
         stage.appendChild(placeholder());
@@ -181,6 +205,13 @@ document.addEventListener('DOMContentLoaded', function () {
     if (totEl) totEl.textContent = pad(apps.length);
     if (apps.length < 2) appsSection.classList.add('apps-single');
 
+    // On phones the track takes the active slide's height, so a long caption doesn't leave a gap under short ones
+    var phone = window.matchMedia('(max-width: 600px)');
+    var fitHeight = function () {
+      if (phone.matches && slides[current]) appsTrack.style.height = (slides[current].offsetHeight + 12) + 'px';
+      else appsTrack.style.height = '';
+    };
+    window.addEventListener('resize', fitHeight);
     var current = -1;
     var setActive = function (i, announce) {
       if (i === current) return;
@@ -191,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (bar) bar.style.transform = 'scaleX(' + ((i + 1) / apps.length) + ')';
       prevBtn.disabled = i === 0;
       nextBtn.disabled = i === apps.length - 1;
+      fitHeight();
       if (announce && status) status.textContent = 'Application ' + (i + 1) + ' of ' + apps.length + ': ' + apps[i].name;
     };
     var go = function (i) {

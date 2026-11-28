@@ -2,7 +2,7 @@
 
 Images for the **Applications** slider on the homepage live in this folder.
 
-1. Export each app image as WebP (JPG/PNG also work), ideally **1600 x 1000 px** (16:10).
+1. Export each app image as WebP (JPG/PNG also work), ideally **2000 px wide** (the stage is about 1.44:1, e.g. 2000 x 1389).
    A composed mockup (several phone screens on a plain background) looks best; a single
    screenshot is centred and shown in full, never cropped.
 2. Name it in lowercase with dashes, e.g. `clinic-booking.webp`.
