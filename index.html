@@ -22,8 +22,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style/style.css?v=20261125c" />
-  <script defer src="script/main.js?v=20261125c"></script>
+  <link rel="stylesheet" href="style/style.css?v=20261128b" />
+  <script defer src="script/apps.js?v=20261128b"></script>
+  <script defer src="script/main.js?v=20261128b"></script>
   <script defer src="script/hero3d.js?v=20261125c"></script>
 
   <!-- Structured data -->
@@ -91,6 +92,7 @@
       </a>
       <nav class="nav" id="site-nav" aria-label="Main">
         <a href="#work">Work</a>
+        <a href="#apps">Apps</a>
         <a href="#services">Services</a>
         <a href="#process">Process</a>
         <a href="#pricing">Pricing</a>
@@ -160,6 +162,44 @@
           </a>
         </div>
       </div>
+    </section>
+
+    <!-- Applications (slides come from script/apps.js, images live in assets/apps/) -->
+    <section id="apps" class="section section-alt apps" aria-labelledby="apps-title">
+      <div class="container">
+        <div class="apps-head">
+          <div class="section-head">
+            <p class="eyebrow">Applications</p>
+            <h2 id="apps-title">Apps and platforms we have designed and built.</h2>
+          </div>
+          <div class="apps-controls" role="group" aria-label="Slider controls">
+            <span class="apps-count" aria-hidden="true"><span id="apps-current">01</span><span class="apps-count-sep">/</span><span id="apps-total">05</span></span>
+            <button type="button" class="apps-arrow" id="apps-prev" aria-label="Previous application">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" class="apps-arrow" id="apps-next" aria-label="Next application">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="apps-slider" role="region" aria-roledescription="carousel" aria-label="Applications">
+        <ul class="apps-track" id="apps-track" tabindex="0" aria-label="Applications, use the arrow keys to move between slides"></ul>
+        <p class="sr-only" id="apps-status" aria-live="polite"></p>
+      </div>
+      <div class="container">
+        <div class="apps-progress" aria-hidden="true"><span id="apps-bar"></span></div>
+        <div class="apps-dots" id="apps-dots" role="group" aria-label="Choose an application"></div>
+      </div>
+      <dialog class="apps-viewer" id="apps-viewer" aria-label="Application image">
+        <div class="apps-viewer-bar">
+          <p class="apps-viewer-title"></p>
+          <button type="button" class="apps-viewer-close" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <img alt="" />
+      </dialog>
     </section>
 
     <!-- Services -->
